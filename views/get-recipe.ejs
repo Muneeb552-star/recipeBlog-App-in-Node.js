@@ -1,0 +1,65 @@
+<div class="px-4 py-5 my-5 text-center">
+    <h1 class="display-5 fw-bold">Update recipe</h1>
+</div>
+
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form action="/submit-update/<%= recipe._id %>" method="POST" enctype="multipart/form-data">
+            <div class="row g-3">
+                <div class="col-12 form-group">
+                    <label for="email" class="form-label">Email</label>
+                    <input type="email" name="email" class="form-control" value="<%= recipe.email %>" id="email">
+                </div>
+                <div class="col-12 form-group">
+                    <label for="recipe" class="form-label">recipe Name</label>
+                    <input type="text" name="name" class="form-control" value="<%= recipe.name %>" id="row">
+                </div>
+                <div class="col-12 form-group">
+                    <label for="description" class="form-label">Description</label>
+                    <textarea type="text" name="description" class="form-control" id="description" cols="30" rows="4"><%= recipe.description %></textarea>
+                </div>
+
+                <label for="ingredients" class="form-label">Ingredients</label>
+                <small>Example: Ice</small>
+                
+                <div class="col-12 form-group">
+                        <div class = "ingredientListUpdate">
+                            <% recipe.ingredients.forEach((value, index) =>{ %>
+                            <div class="ingredientDivUpdate d-flex justify-content-between mb-1">
+                                <input type="text" name="ingredients" value="<%= value %>"  class="form-control">
+                                <i class="fa fa-times ms-2" onclick="this.parentElement.remove();"></i>
+                            </div>
+                             <% }) %>
+                        </div>
+                </div>
+                <div class="col-12">
+                    <button type="button" class="btn btn-outline-primary" id="addIngredientsBtnUpdate" onclick="updateIngredients()" >+ Ingredient</button>
+                </div>
+
+                <div class="col-12 form-group">
+                    <label for="category">Select Category</label>
+                    <select name="category" aria-label="Category" class="form-control">
+                        <% if(allCategory !=""){ %>
+                            <% allCategory.forEach((name, index) => { %>
+                                <% if (name.name == recipe.category){ %>
+                                    <option value="<%= name.name %>" selected><%= name.name %></option>
+                                    <% } else{ %>
+                                        <option value="<%= name.name %>"><%= name.name %></option>
+                                        <% } %>
+                                <% }) %>
+                            <% } %>
+                    </select>
+                </div>
+                <div class="col-12">
+                    <label for="image">Product Image</label>
+                    <input type="file" class="form-control" name="image" accept="image/*">
+                    <img src="/uploads/<%= recipe.image %>" width="100" class="img-thumbnail mt-1">
+                </div>
+                <input type="hidden" name="old_image" value="<%= recipe.image %>">
+                <div class="col-12">
+                    <button type="submit" class="btn btn-primary" id="addIngredientsBtn">Update row</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

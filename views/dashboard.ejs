@@ -1,0 +1,37 @@
+<div class="container-fluid">
+    <div class="row my-4">
+      <div class="col-lg-10 offset-lg-1">
+        <div class="table-responsive">
+          <% if(recipe != "") { %>
+          <table class="table table-striped text-center data_table">
+            <thead>
+              <tr class="table-dark">
+                <th>ID</th>
+                <th>Image</th>
+                <th>Name</th>
+                <th>Category</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% recipe.forEach((row, index) => { %>
+                <tr class="align-middle">
+                  <td><%= index %></td>
+                  <td><img src="/uploads/<%=row.image %>" alt="" width="50" class="img-thumbnail" /></td>
+                  <td><%= row.name %></td>
+                  <td><%= row.category %></td>
+                  <td>
+                    <a href="/get-recipe/<%= row._id %>" class="text-success"><i class="fas fa-edit fa-lg mx-1"></i></a>
+                    <a href="/delete-recipe/<%= row._id %>" class="text-danger"><i class="fas fa-trash fa-lg mx-1"></i></a>
+                  </td>
+                </tr>
+              <% }) %>
+            </tbody>
+          </table>
+          <% } else { %>
+          <h1 class="text-center text-secondary mt-5">No Users Found</h1>
+          <% } %>
+        </div>
+      </div>
+    </div>
+  </div>
